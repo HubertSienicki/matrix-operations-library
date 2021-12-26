@@ -5,6 +5,8 @@
  */
 package matrix.operations.library;
 
+import java.util.Random;
+
 /**
  *
  * @author kneiv
@@ -15,7 +17,19 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        int[][] matrix = new int[10][10];
+        
+        Random r = new Random();
+        
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                matrix[i][j] = r.nextInt(10);
+            }
+        }
+        
+        Matrix m = new Matrix(matrix);
+        
+        m.print();
     }
     
 }
