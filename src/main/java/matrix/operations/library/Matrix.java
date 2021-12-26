@@ -15,6 +15,10 @@ public class Matrix {
     public Matrix(int[][] matrix) {
         this.matrix = matrix;
     }
+    
+    public Matrix(){
+        
+    }
 
     public int[][] getMatrix() {
         return matrix;
@@ -26,9 +30,9 @@ public class Matrix {
     /*TODO:
         1.Matrix printing : DONE
         2.Matrix multiplication : DONE
-        3.Matrix addition : 
-        4.Matrix subtraction
-        5.Matrix inversion
+        3.Matrix addition : DONE (throws an array index out of bounds exception when both matrices hav different dimenstions)
+        4.Matrix subtraction : DONE
+        5.Matrix inversion : 
         6.Matrix patrial inversion
         7.Matrix transposition
         8.Equation solving using matrices
@@ -37,6 +41,7 @@ public class Matrix {
         11.Removing certain number from a matrix
         12.Adding a number to an index
         13.Multiply all
+        14.SORT matrices
     */
     
     //Function for printing out loaded matrix
@@ -61,7 +66,6 @@ public class Matrix {
     
     public int[][] multiplyMatrices(int[][] firstMatrix, int[][] secondMatrix){
         int[][] result = new int[firstMatrix.length][secondMatrix[0].length];
-        
         for (int i = 0; i < result.length; i++) {
             for (int j = 0; j < result[i].length; j++) {
                 result[i][j] = multiplyCells(firstMatrix, secondMatrix, i, j);
@@ -99,7 +103,31 @@ public class Matrix {
             }
         }
         return result;
-    }        
+    }
+    
+    //subtracts a variable matrix from a loaded matrix
+    public int[][] subtract(int[][] secondMatrix){
+        int[][] result = new int[this.matrix.length][secondMatrix[0].length];
+        
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[i].length; j++) {
+                result[i][j] = this.matrix[i][j] - secondMatrix[i][j];
+            }
+        }
+        return result;
+    }
+    
+    //subtracts an two matrices from eachother
+    public int[][] subtract(int[][] firstMatrix, int[][] secondMatrix){
+        int[][] result = new int[firstMatrix.length][secondMatrix[0].length];
+        
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[i].length; j++) {
+                result[i][j] = firstMatrix[i][j] - secondMatrix[i][j];
+            }
+        }
+        return result;
+    }
     
     
     
