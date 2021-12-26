@@ -6,6 +6,8 @@
 package matrix.operations.library;
 
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +20,7 @@ public class Main {
      */
     public static void main(String[] args) {
         int[][] matrix = new int[10][10];
-        int[][] matrix2 = new int[9][7];
+        int[][] matrix2 = new int[10][10];
         
         Random r = new Random();
         
@@ -44,6 +46,10 @@ public class Main {
         m.print(m.multiplyMatrices(matrix2));
         System.out.println("");
         m.print(m.multiplyMatrices(matrix, matrix2));
+        System.out.println("Added MATRICES");
+        m.print(m.addMatrices(matrix2));
+        System.out.println("");
+        m.print(m.addMatrices(matrix, matrix2));
                 
     }
     
