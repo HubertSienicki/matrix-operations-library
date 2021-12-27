@@ -34,7 +34,7 @@ public class Matrix {
         2.Matrix multiplication : DONE
         3.Matrix addition : DONE (throws an array index out of bounds exception when both matrices hav different dimenstions)
         4.Matrix subtraction : DONE
-        5.Matrix inversion : 
+        5.Matrix inversion : (int)DONE, (double)TODO
         6.Matrix patrial inversion
         7.Matrix transposition
         8.Equation solving using matrices
@@ -129,7 +129,38 @@ public class Matrix {
         }
         return result;
     }
+    
+    public int[][] invert(int matrix[][]){
+        int n = matrix.length;
+        int x[][] = new int[n][n];
+        int b[][] = new int[n][n];
+        int index[] = new int [n];
+        for (int i = 0; i < n; i++)
+            b[i][i] = 1;
+        
+        gaussianPivoting(matrix, index);
+        
+        for (int i = 0; i < n-1; i++) 
+            for (int j = i+1; j < n; j++) 
+                for (int k = 0; k < n; k++) 
+                    b[index[j]][k] -= matrix[index[i]][k];
+        
+        for (int i = 0; i < n; i++) {
+            x[n-1][i] = b[index[n-1]][i] / matrix[index[n-1]][n-1];
+            
+            for (int j = n-2; j >= 0; j--) {
+                x[j][i] = b[index[j]][i];
+            
+                for (int k = j+1; k < n; k++) {
+                    x[j][i] -= matrix[index[j]][k] * x[k][i];
+                }
+                x[j][i] /= matrix[index[j]][j];
+            }
+        }
+        return x;
+    }
 
+    
     //---------Helper Methods-----------//
     //Used in matrix multiplication to multiply row of cells
     private int multiplyCells(int[][] firstMatrix, int[][] secondMatrix, int row, int col) {
@@ -148,10 +179,10 @@ public class Matrix {
     }
     
     private int findOrder(int[][] matrix){
-        return matrix.length
+        return matrix.length;
     }
     
-    //only works for square matrices (N is the order of the square matrix)
+    //only works for square matrices (N is the order of the square matrix) 
     private int findDeterminant(int[][] matrix, int N) {
         int det;
         switch (N) {
@@ -182,4 +213,59 @@ public class Matrix {
         }
         return det;
     }
-}
+    
+    //gaussian partial pivoitng 
+    private void gaussianPivoting(int[][] matrix, int[] index){
+        int n = index.length;
+        int c[] = new int[n];
+ 
+    // Initialize the index
+           for (int i=0; i<n; ++i) 
+               index[i] = i;
+
+    // Find the rescaling factors, one from each row
+           for (int i=0; i<n; ++i) 
+           {
+               int c1 = 0;
+               for (int j=0; j<n; ++j) 
+               {
+                   int c0 = Math.abs(matrix[i][j]);
+                   if (c0 > c1) c1 = c0;
+               }
+               c[i] = c1;
+           }
+
+    // Search the pivoting element from each column
+           int k = 0;
+           for (int j=0; j<n-1; ++j) 
+           {
+               int pi1 = 0;
+               for (int i=j; i<n; ++i) 
+               {
+                   int pi0 = Math.abs(matrix[index[i]][j]);
+                   pi0 /= c[index[i]];
+                   if (pi0 > pi1) 
+                   {
+                       pi1 = pi0;
+                       k = i;
+                   }
+               }
+
+      // Interchange rows according to the pivoting order
+               int itmp = index[j];
+               index[j] = index[k];
+               index[k] = itmp;
+               for (int i=j+1; i<n; ++i) 	
+               {
+                   int pj = matrix[index[i]][j]/matrix[index[j]][j];
+
+    // Record pivoting ratios below the diagonal
+                   matrix[index[i]][j] = pj;
+
+    // Modify other elements accordingly
+                   for (int l=j+1; l<n; ++l)
+                       matrix[index[i]][l] -= pj*matrix[index[j]][l];
+               }
+           }
+       }
+   }

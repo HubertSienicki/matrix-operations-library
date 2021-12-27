@@ -50,7 +50,8 @@ public class Main {
         m.print(m.addMatrices(matrix2));
         System.out.println("");
         m.print(m.addMatrices(matrix, matrix2));
-                
+        System.out.println("");
+        m.print(m.invert(matrix));
     }
     
 }
