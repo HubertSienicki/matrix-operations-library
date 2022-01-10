@@ -28,15 +28,16 @@ public class Matrix {
     public void setMatrix(int[][] matrix) {
         this.matrix = matrix;
     }
-
+    
+    /* MAKE GENERIC */
+    
     /*TODO:
         1.Matrix printing : DONE
         2.Matrix multiplication : DONE
         3.Matrix addition : DONE (throws an array index out of bounds exception when both matrices hav different dimenstions)
         4.Matrix subtraction : DONE
         5.Matrix inversion : (int)DONE, (double)TODO
-        6.Matrix patrial inversion
-        7.Matrix transposition
+        7.Matrix transposition : DONE
         8.Equation solving using matrices
         9.Changing element at index
         10.Merging two matrices together at an index
@@ -159,7 +160,28 @@ public class Matrix {
         }
         return x;
     }
-
+    
+    public int[][] transpose(){
+        int[][] transpose = new int[this.matrix.length][this.matrix[0].length];
+        
+        for (int i = 0; i < this.matrix.length; i++) {
+            for (int j = 0; j < this.matrix[0].length; j++) {
+                transpose[i][j] = this.matrix[j][i];
+            }
+        }
+        return transpose;
+    }
+    
+    public int[][] transpose(int[][] matrix){
+        int[][] transpose = new int[matrix.length][matrix[0].length];
+        
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                transpose[i][j] = matrix[j][i];
+            }
+        }
+        return transpose;
+    }
     
     //---------Helper Methods-----------//
     //Used in matrix multiplication to multiply row of cells

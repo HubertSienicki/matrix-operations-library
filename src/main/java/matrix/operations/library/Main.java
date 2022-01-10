@@ -39,19 +39,21 @@ public class Main {
         Matrix m = new Matrix(matrix);
         m.print();
         System.out.println("");
-        m.print(matrix2);
+//        m.print(matrix2);
         
+//        System.out.println("");
+//        System.out.println("Multiplied matrices");
+//        m.print(m.multiplyMatrices(matrix2));
+//        System.out.println("");
+//        m.print(m.multiplyMatrices(matrix, matrix2));
+//        System.out.println("Added MATRICES");
+//        m.print(m.addMatrices(matrix2));
+//        System.out.println("");
+//        m.print(m.addMatrices(matrix, matrix2));
+//        System.out.println("");
+//        m.print(m.invert(matrix));
         System.out.println("");
-        System.out.println("Multiplied matrices");
-        m.print(m.multiplyMatrices(matrix2));
-        System.out.println("");
-        m.print(m.multiplyMatrices(matrix, matrix2));
-        System.out.println("Added MATRICES");
-        m.print(m.addMatrices(matrix2));
-        System.out.println("");
-        m.print(m.addMatrices(matrix, matrix2));
-        System.out.println("");
-        m.print(m.invert(matrix));
+        m.print(m.transpose(matrix));
     }
     
 }
